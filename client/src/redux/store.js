@@ -15,10 +15,14 @@ const composeEnhancers =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
     }) : compose;
 
+// On prépare les middleWares qui vont intercepter...
+// ...les actions dispatchées et les traiter avant de les renvoyer...
+// ...vers les reducers ou d'envoyer d'autres actions.
 const enhancer = composeEnhancers(
   applyMiddleware(sagaMiddleware, logger),
 );
 
+// On crée le store en lui passant le rootReducer et les middlWares
 export const store = createStore(
     rootReducer,
     enhancer

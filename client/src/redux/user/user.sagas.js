@@ -50,6 +50,7 @@ export function* signInWithEmail({ payload: { email, password } }) {
   }
 }
 
+// Traite l'appel asynchrone de la fonction getCurrentUser()...
 export function* isUserAuthenticated() {
   try {
     const userAuth = yield getCurrentUser();
@@ -90,6 +91,9 @@ export function* onEmailSignInStart() {
   yield takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, signInWithEmail);
 }
 
+// Intercepte l'action CHECK_USER_SESSION qui a été dispatchée...
+// ...pour appeler la fonction isUserAuthenticated qui va traiter...
+// ...l'appel asynchrone.
 export function* onCheckUserSession() {
   yield takeLatest(UserActionTypes.CHECK_USER_SESSION, isUserAuthenticated);
 }

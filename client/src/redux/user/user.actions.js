@@ -1,5 +1,8 @@
 import UserActionTypes from './user.types';
 
+// Une action est une fonction qui retourne un objet avec un type...
+// ... qui est le nom de l'action et un payload si elle reçoit... 
+// ... un paramètre
 export const googleSignInStart = () => ({
   type: UserActionTypes.GOOGLE_SIGN_IN_START
 });
@@ -19,6 +22,8 @@ export const emailSignInStart = emailAndPassword => ({
   payload: emailAndPassword
 });
 
+// Action CHECK_USER_SESSION qui peut être dispatchée...
+// ...dans un composant.
 export const checkUserSession = () => ({
   type: UserActionTypes.CHECK_USER_SESSION
 });

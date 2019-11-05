@@ -11,6 +11,8 @@ import './index.css';
 import App from './App';
 
 ReactDOM.render(
+  // On passe le store de redux au Provider qui le mettra...
+  // ...à disposition de ses composants enfants
   <Provider store={store}>
     <BrowserRouter>
       <PersistGate persistor={persistor}>

@@ -13,6 +13,9 @@ const persistConfig = {
   whitelist: ['cart']
 };
 
+// On combine les morceaux de state en leur donnant un nom...
+// ... à chacun pour pouvoir y accéder ensuite dans les mapToProps
+
 const rootReducer = combineReducers({
   user: userReducer,
   cart: cartReducer,
