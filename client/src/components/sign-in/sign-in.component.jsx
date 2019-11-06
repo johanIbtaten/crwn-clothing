@@ -26,6 +26,9 @@ const SignIn = ({ emailSignInStart, googleSignInStart }) => {
   const handleSubmit = async event => {
     event.preventDefault();
 
+    // On dispatch l'action emailSignInStart en lui passant
+    // l'email et le password en paramètres qui seront transformés
+    // au niveau de mapDispatchToProps en un seul objet pour le payload
     emailSignInStart(email, password);
   };
 
@@ -72,8 +75,14 @@ const SignIn = ({ emailSignInStart, googleSignInStart }) => {
   );
 };
 
+// On passe en props nos deux fonction nommées googleSignInStart et
+// emailSignInStart qui vont permettre à notre composant de dispatcher
+// l'action googleSignInStart sans payload et emailSignInStart avec
+// un payload
 const mapDispatchToProps = dispatch => ({
   googleSignInStart: () => dispatch(googleSignInStart()),
+  // L'email et le password sont tranformés en un objet avec les deux
+  // propriétés email et password
   emailSignInStart: (email, password) =>
     dispatch(emailSignInStart({ email, password }))
 });

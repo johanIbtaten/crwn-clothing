@@ -25,7 +25,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   // et userAuth.uid l'id du document demandé.
   const userRef = firestore.doc(`users/${userAuth.uid}`);
 
-  // On récupère l'objet snapshot à partir de l'objet reference grâce
+  // On récupère l'objet snapShot à partir de l'objet reference grâce
   // à sa méthode get() Cette objet contient les données.      
   const snapShot = await userRef.get();
 
@@ -48,6 +48,8 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     }
   }
 
+  // On retourne l'objet reference qui permet d'accéder à  
+  // l'objet snapShot qui contient les données.
   return userRef;
 };
 

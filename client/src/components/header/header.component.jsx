@@ -39,12 +39,20 @@ const Header = ({ currentUser, hidden, signOutStart }) => (
       )}
       <CartIcon />
     </OptionsContainer>
+    { /*
+    Si hidden est true alors on fait disparaitre le composant
+    <CartDropdown /> avec null
+    Si hidden est false on l'affiche
+    */ }
     {hidden ? null : <CartDropdown />}
   </HeaderContainer>
 );
 
 // Permet de récupérer des valeurs du store pour les passer en props...
 // ...au composant. Ces valeurs sont indentifiées par un nom de props.
+// On utilise des selectors pour la memoïsation des props
+// createStructuredSelector permet de passer implicitement le store 
+// de redux à chaque selector.
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
   hidden: selectCartHidden

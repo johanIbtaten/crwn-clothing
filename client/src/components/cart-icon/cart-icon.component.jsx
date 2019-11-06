@@ -23,6 +23,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = createStructuredSelector({
+  // On utilise un output selector pour memoïser la valeur de itemCount
+  // Si le panier comporte le même nombre d'items on ne va pas
+  // recalculer la valeur de la props itemCount ni rerender
+  // le composant ce qui fait gagner en performances.
   itemCount: selectCartItemsCount
 });
 

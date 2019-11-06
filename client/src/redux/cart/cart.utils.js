@@ -1,8 +1,13 @@
 export const addItemToCart = (cartItems, cartItemToAdd) => {
+  // Si l'item du panier que l'on souhaite ajouter existe déjà dans
+  // la collection cartItems alors existingCartItem est évalué à true. 
+  // Si il n'existe pas existingCartItem vaut undefined évalué à false
   const existingCartItem = cartItems.find(
     cartItem => cartItem.id === cartItemToAdd.id
   );
 
+  // Si l'item existe déjà dans le panier, on retourne la collection
+  // avec la quantity de l'item augmentée de 1
   if (existingCartItem) {
     return cartItems.map(cartItem =>
       cartItem.id === cartItemToAdd.id
@@ -11,6 +16,8 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
     );
   }
 
+  // Si l'item n'existe pas on retourne la collection avec 
+  // une quantity de 1 
   return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
 };
 

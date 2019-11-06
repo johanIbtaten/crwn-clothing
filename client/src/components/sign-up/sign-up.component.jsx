@@ -16,22 +16,33 @@ const SignUp = ({ signUpStart }) => {
     confirmPassword: ''
   });
 
+  // On récupère les valeurs du state local userCredentials.
   const { displayName, email, password, confirmPassword } = userCredentials;
 
   const handleSubmit = async event => {
+    // Annule l'action implicite correspondante à l'évènement onSubmit
+    // qui est normalement de soumettre le formulaire et d'envoyer
+    // les données à une autre url ou de recharger la page.
     event.preventDefault();
 
     if (password !== confirmPassword) {
       alert("passwords don't match");
+      // Si les deux champs ne match pas on ne soumet pas le formulaire.
       return;
     }
 
+    // On dispatch une action en lui passant un objet qui représente
+    // les userCredentials pour le mettre dans son payload
     signUpStart({ displayName, email, password });
   };
-
+  
   const handleChange = event => {
+    // Récupère les valeurs name, value de l'élément qui a déclenché 
+    // l'event onChange
     const { name, value } = event.target;
 
+    // On met à jour le state local userCredentials 
+    // avec les valeurs du formulaire.  
     setUserCredentials({ ...userCredentials, [name]: value });
   };
 

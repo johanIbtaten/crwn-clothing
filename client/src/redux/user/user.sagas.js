@@ -19,13 +19,20 @@ import {
 } from '../../firebase/firebase.utils';
 
 export function* getSnapshotFromUserAuth(userAuth, additionalData) {
-  try {
+  try { 
     const userRef = yield call(
       createUserProfileDocument,
       userAuth,
       additionalData
     );
+    // On récupère l'objet snapShot à partir de l'objet reference
     const userSnapshot = yield userRef.get();
+    // On dispatch l'action signInSuccess en lui passant sous 
+    // forme d'un objet les données de l'utilisateur (stockées
+    // dans un document de la collection users dans Firebase)
+    // à partir du userSnapshot pour que l'action le place 
+    // dans son payload et ainsi pour pouvoir les utiliser 
+    // dans l'application si besoin.   
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
     yield put(signInFailure(error));
@@ -50,11 +57,15 @@ export function* signInWithEmail({ payload: { email, password } }) {
   }
 }
 
-// Traite l'appel asynchrone de la fonction getCurrentUser()...
 export function* isUserAuthenticated() {
   try {
     const userAuth = yield getCurrentUser();
+    // Si il n'y a pas d'utilisateur connecté à Firebase
+    // on retourne undefined
     if (!userAuth) return;
+    // Si l'utilisateur est connecté on appelle la fonction
+    // getSnapshotFromUserAuth qui va permettre de récupérer les données
+    // de l'utilisateur.
     yield getSnapshotFromUserAuth(userAuth);
   } catch (error) {
     yield put(signInFailure(error));
@@ -70,16 +81,27 @@ export function* signOut() {
   }
 }
 
+// On passe en paramètre par destructuring les données de l'objet 
+// payload provenant de l'action SIGN_UP_START
 export function* signUp({ payload: { email, password, displayName } }) {
   try {
+    // On récupère l'objet user de Firebase après l'incription
+    // grâce à l'email et le password.
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+    // On dispatch l'action SIGN_UP_SUCCESS qui appelle la fonction
+    // signInAfterSignUp
     yield put(signUpSuccess({ user, additionalData: { displayName } }));
   } catch (error) {
     yield put(signUpFailure(error));
   }
 }
 
+// On passe en paramètre par destructuring les données de l'objet 
+// payload provenant de l'action SIGN_UP_SUCCESS
 export function* signInAfterSignUp({ payload: { user, additionalData } }) {
+  // On appelle la fonction getSnapshotFromUserAuth qui va créer
+  // un nouvel utilisateur dans users dans la bdd et connecter
+  // le nouvel utilisateur
   yield getSnapshotFromUserAuth(user, additionalData);
 }
 
