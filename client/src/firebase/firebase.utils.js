@@ -54,14 +54,20 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 };
 
 export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  // On crée une collection avec le nom collectionKey
+  // Firebase nous renvoie une reference
   const collectionRef = firestore.collection(collectionKey);
-
+  // On récupère l'objet batch de Firebase
   const batch = firestore.batch();
+  // On boucle sur le tableau d'objets à insérer
   objectsToAdd.forEach(obj => {
+    // On crée une nouvelle reference de document
     const newDocRef = collectionRef.doc();
+    // On insère l'objet dans le document Firebase
+    // Quand on fait plusieurs set on utilise batch de Firebase 
     batch.set(newDocRef, obj);
   });
-
+  // batch.commit() renvoie une promesse qui est résolue avec la valeur null
   return await batch.commit();
 };
 
@@ -85,11 +91,16 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
 //   collectionsArray: selectCollectionsForPreview
 // });
 
+// Transorme les données Back-End de Firebase
+// en données pour le Front-End sous forme d'une Hashmap
 export const convertCollectionsSnapshotToMap = collections => {
+  // On récupère les données depuis collections
+  // On retrourne un tableau avec les données reformatées pour le Front-End
   const transformedCollection = collections.docs.map(doc => {
     const { title, items } = doc.data();
 
     return {
+      // Encode les caractères spéciaux pour une URL
       routeName: encodeURI(title.toLowerCase()),
       id: doc.id,
       title,
@@ -97,8 +108,18 @@ export const convertCollectionsSnapshotToMap = collections => {
     };
   });
 
+  // {} en second argument de reduce() représente l'état initial 
+  // de l'accumulator.
+  // collection est l'objet courant lors de l'itération
   return transformedCollection.reduce((accumulator, collection) => {
+    // On crée une propriété à partir du titre de la collection
+    // On lui assigne comme valeur l'objet collection
     accumulator[collection.title.toLowerCase()] = collection;
+    // On retourne l'accumulator pour une autre itération
+    // qui va ajouter une autre propriété avec son objet associé
+    // Pour retourner au final une Hashmap de nos données
+    // qui est plus rapide d'accès qu'un simple tableau indexé
+    // (Data Normalization)
     return accumulator;
   }, {});
 };

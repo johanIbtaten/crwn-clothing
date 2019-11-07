@@ -25,11 +25,16 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
   const existingCartItem = cartItems.find(
     cartItem => cartItem.id === cartItemToRemove.id
   );
-
+  
+  // Si l'item que l'on souhaite supprimer  a une quantity à 1 
+  // on supprime l'item de la collection en retournant la collection
+  // sans l'item.
   if (existingCartItem.quantity === 1) {
     return cartItems.filter(cartItem => cartItem.id !== cartItemToRemove.id);
   }
 
+  // Si l'item que l'on souhaite supprimer a une quantity supérieure à 1 
+  // on retourne la collection avec la quantity de l'item diminuée de 1
   return cartItems.map(cartItem =>
     cartItem.id === cartItemToRemove.id
       ? { ...cartItem, quantity: cartItem.quantity - 1 }

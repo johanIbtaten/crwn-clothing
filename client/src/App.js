@@ -36,6 +36,10 @@ const App = ({ checkUserSession, currentUser }) => {
         <ErrorBoundary>
           <Suspense fallback={<Spinner />}>
             <Route exact path='/' component={HomePage} />
+            { /*
+            Route passe automatiquement les objets match, location et history
+            au composant qu'il affiche.
+            */ }            
             <Route path='/shop' component={ShopPage} />
             <Route exact path='/checkout' component={CheckoutPage} />
             <Route

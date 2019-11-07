@@ -1,9 +1,13 @@
+// css permet de créer des blocs de css réutilisable dans les composants
+// stylisés soit pour étendre les styles d'un composant soit pour éviter 
+// de dupliquer des styles
 import styled, { css } from 'styled-components';
 
 const buttonStyles = css`
   background-color: black;
   color: white;
 
+  // On peut comme dans sass imbriquer les sélecteurs
   &:hover {
     background-color: white;
     color: black;
@@ -11,6 +15,7 @@ const buttonStyles = css`
   }
 `;
 
+// On crée un bloc de style réutilisable
 const invertedButtonStyles = css`
   background-color: white;
   color: black;
@@ -33,6 +38,8 @@ const googleSignInStyles = css`
   }
 `;
 
+// On crée une fonction qui prend les props du composant en paramètre
+// et retourne le style correspondant aux props que l'on a passé
 const getButtonStyles = props => {
   if (props.isGoogleSignIn) {
     return googleSignInStyles;

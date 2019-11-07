@@ -32,7 +32,8 @@ export function* getSnapshotFromUserAuth(userAuth, additionalData) {
     // dans un document de la collection users dans Firebase)
     // à partir du userSnapshot pour que l'action le place 
     // dans son payload et ainsi pour pouvoir les utiliser 
-    // dans l'application si besoin.   
+    // dans l'application si besoin. On récupère l'id gâce à userSnapshot.id
+    // et l'objet contenant les données grâce à la méthode userSnapshot.data()   
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
     yield put(signInFailure(error));

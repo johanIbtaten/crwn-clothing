@@ -13,8 +13,10 @@ import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { signOutStart } from '../../redux/user/user.actions';
 
+// On importe le crown.svg comme un composant que l'on nomme Logo
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
+// On importe les composants stylisés depuis header.styles.jsx
 import {
   HeaderContainer,
   LogoContainer,
@@ -31,6 +33,8 @@ const Header = ({ currentUser, hidden, signOutStart }) => (
       <OptionLink to='/shop'>SHOP</OptionLink>
       <OptionLink to='/shop'>CONTACT</OptionLink>
       {currentUser ? (
+        // as='div' permet transformer le composant OptionLink en div
+        // en gardant les styles de OptionLink
         <OptionLink as='div' onClick={signOutStart}>
           SIGN OUT
         </OptionLink>
@@ -42,7 +46,7 @@ const Header = ({ currentUser, hidden, signOutStart }) => (
     { /*
     Si hidden est true alors on fait disparaitre le composant
     <CartDropdown /> avec null
-    Si hidden est false on l'affiche
+    Si hidden est false on l'affiche 
     */ }
     {hidden ? null : <CartDropdown />}
   </HeaderContainer>

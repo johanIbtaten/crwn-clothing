@@ -30,9 +30,12 @@ export const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 
+// On crée un persistor qui va permettre de stocker une partie
+// du store que l'on souhaite dans le local storage du navigateur 
+// même si on ferme le navigateur. 
 export const persistor = persistStore(store);
 
-export default { store, persistStore };
+export default { store, persistor };
 
 
 

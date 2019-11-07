@@ -10,6 +10,8 @@ export const selectCollections = createSelector(
 export const selectCollectionsForPreview = createSelector(
   [selectCollections],
   collections =>
+    // Object.keys retourne un tableau des noms de propriété de l'objet
+    // passé en argument 
     collections ? Object.keys(collections).map(key => collections[key]) : []
 );
 

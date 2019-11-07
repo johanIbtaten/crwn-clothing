@@ -16,6 +16,8 @@ const CollectionPreview = ({ title, items, history, match, routeName }) => (
     </TitleContainer>
     <PreviewContainer>
       {items
+        // idx représente l'index de l'élément courant parcouru
+        // On garde les 4 premiers items du tableau d'items
         .filter((item, idx) => idx < 4)
         .map(item => (
           <CollectionItem key={item.id} item={item} />

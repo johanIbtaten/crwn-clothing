@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+// On importe le composant Link pour le styliser
 import { Link } from 'react-router-dom';
 
 export const HeaderContainer = styled.div`
@@ -15,6 +16,8 @@ export const HeaderContainer = styled.div`
   }
 `;
 
+// On passe en paramètre a styled() le composant 
+// dont on veut étendre les styles
 export const LogoContainer = styled(Link)`
   height: 100%;
   width: 70px;

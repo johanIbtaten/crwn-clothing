@@ -26,10 +26,22 @@ const ShopPage = ({ fetchCollectionsStart, match }) => {
       <Suspense fallback={<Spinner />}>
         <Route
           exact
+          /*
+          match.path retourne l'url relative du composant. Ici /shop
+          Si on tape l'url /shop alors on affiche le composant 
+          CollectionsOverviewContainer
+          */
           path={`${match.path}`}
           component={CollectionsOverviewContainer}
         />
         <Route
+          /*
+          Si on tape une url /shop avec un paramètre derrière
+          comme /hats par exemple soit /shop/hats
+          On affiche alors le composant CollectionPageContainer
+          :collectionId veut dire que hats sera accessible comme paramètre
+          depuis le composant CollectionPageContainer 
+          */
           path={`${match.path}/:collectionId`}
           component={CollectionPageContainer}
         />

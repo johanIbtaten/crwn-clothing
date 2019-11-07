@@ -15,6 +15,10 @@ ReactDOM.render(
   // ...à disposition de ses composants enfants
   <Provider store={store}>
     <BrowserRouter>
+      { /*
+      On entoure notre application avec le PersistGate pour qu'elle
+      puisse accéder à la persistance.
+      */ }  
       <PersistGate persistor={persistor}>
         <App />
       </PersistGate>
