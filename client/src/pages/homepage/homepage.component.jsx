@@ -12,6 +12,10 @@ const HomePage = () => {
   /*throw Error;*/
   return (
   <HomePageContainer>
+  {/*
+  Profiler permet de logger combien de temps met un composant
+  à se charger
+  */}
   <Profiler
     id='Directory'
     onRender={(id, phase, actualDuration) => {

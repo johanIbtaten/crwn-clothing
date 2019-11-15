@@ -6,8 +6,8 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
     cartItem => cartItem.id === cartItemToAdd.id
   );
 
-  // Si l'item existe déjà dans le panier, on retourne la collection
-  // avec la quantity de l'item augmentée de 1
+  // Si l'item existe déjà dans le panier, on retourne le tableau
+  // d'items avec la quantity de l'item augmentée de 1
   if (existingCartItem) {
     return cartItems.map(cartItem =>
       cartItem.id === cartItemToAdd.id
@@ -16,8 +16,8 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
     );
   }
 
-  // Si l'item n'existe pas on retourne la collection avec 
-  // une quantity de 1 
+  // Si l'item n'existe pas on retourne le tableau d'items avec 
+  // la quantity de l'item à 1 
   return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
 };
 
