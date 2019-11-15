@@ -1,5 +1,5 @@
-// La librarie reselect permet de retourner des valeurs du store
-// de redux calculées ou non et de les memoïser
+// La librarie reselect permet de retourner une version formatée 
+// et/ou réduite, propice aux besoins de nos vues.
 import { createSelector } from 'reselect';
 
 // Input selector qui permet de sélectionner une partie du store

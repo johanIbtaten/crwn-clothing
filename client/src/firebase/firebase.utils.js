@@ -32,6 +32,9 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   // Si il n'y a pas de données existantes à l'id 
   // demandé snapShot.exists renvoie false 
   if (!snapShot.exists) {
+    // Quand le paramètre userAuth provient d'une inscription
+    // par email et password, Firebase renvoie un objet user
+    // avec la propriété displayName à null
     const { displayName, email } = userAuth;
     const createdAt = new Date();
     try {
@@ -41,6 +44,10 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createdAt,
+        // additionalData sert à passer le displayName du
+        // formulaire d'inscription pour l'ajouter dans le profil
+        // de l'utilisateur en bdd quand il s'inscrit à Firebase avec
+        // son email et password
         ...additionalData
       });
     } catch (error) {
@@ -136,6 +143,8 @@ export const getCurrentUser = () => {
     // Si aucun utilisateur n'est déconnecté userAuth vaut null
     // qui est évalué à false.
     const unsubscribe = auth.onAuthStateChanged(userAuth => {
+      // Une fois qu'on récupère notre utilisateur connécté
+      // On désabonne l'écouteur onAuthStateChanged
       unsubscribe();
       resolve(userAuth);
     }, reject);
@@ -145,6 +154,8 @@ export const getCurrentUser = () => {
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
+// On export le googleProvider qui va permettre de générer
+// le popup de connexion Google dans user.sagas.js
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: 'select_account' });
 // Permet d'exporter la fonction signInWithGoogle qui permet...

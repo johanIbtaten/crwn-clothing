@@ -17,6 +17,8 @@ const CollectionPageContainer = lazy(() =>
 );
 
 const ShopPage = ({ fetchCollectionsStart, match }) => {
+  // [fetchCollectionsStart] plutôt qu'un tableau vide [] évite
+  // un warning qui demande une dépendance.
   useEffect(() => {
     fetchCollectionsStart();
   }, [fetchCollectionsStart]);

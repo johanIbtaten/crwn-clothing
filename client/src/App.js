@@ -16,6 +16,12 @@ import { selectCurrentUser } from './redux/user/user.selectors';
 // ...le dispatch.
 import { checkUserSession } from './redux/user/user.actions';
 
+// Après avoir importé lazy from react, on peut utiliser
+// l'import dynamique partout où il y a des Route pour 
+// optimiser le chargement des JS
+// React charge le chunk du script relatif au composant 
+// seulement au moment où le composant est chargé grâce au Route
+// Si on regarde le network des fichiers chargés
 const HomePage = lazy(() => import('./pages/homepage/homepage.component'));
 const ShopPage = lazy(() => import('./pages/shop/shop.component'));
 const SignInAndSignUpPage = lazy(() =>
@@ -24,7 +30,15 @@ const SignInAndSignUpPage = lazy(() =>
 const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'));
 
 const App = ({ checkUserSession, currentUser }) => {
+  // On utilise useEffect avec un tableau de dépendance 
+  // en deuxième argument pour que l'effet ne se produire qu'une
+  // seule fois au moment où le composant est monté. Comme
+  // checkUserSession() ne changera pas, l'effet ne sera pas déclenché
+  // d'autres fois.
   useEffect(() => {
+  // On dispatche une action qui va vérifier au premier
+  // chargement de l'application si un utilisateur est déjà 
+  // connecté à l'application via Firebase 
     checkUserSession();
   }, [checkUserSession]);
 
@@ -34,6 +48,14 @@ const App = ({ checkUserSession, currentUser }) => {
       <Header />
       <Switch>
         <ErrorBoundary>
+          {/* 
+          Le composant importé dynamiquement devrait être exploité 
+          dans un composant Suspense, qui nous permet d’afficher 
+          un contenu de repli (ex. un indicateur de chargement) 
+          en attendant que ce module soit chargé. Ici un composant
+          <Spinner /> mais pourrait aussi être directement du code
+          html <div>Chargement...</div>
+          */}
           <Suspense fallback={<Spinner />}>
             <Route exact path='/' component={HomePage} />
             { /*

@@ -24,6 +24,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentUser: action.payload,
+        // Comme l'incription s'est faite avec succès on met
+        // error à null
         error: null
       };
     case UserActionTypes.SIGN_OUT_SUCCESS:

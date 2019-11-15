@@ -28,6 +28,8 @@ export const store = createStore(
     enhancer
 );
 
+// On active les sagas (les fonctions generators) que l'on
+// souhaite utiliser
 sagaMiddleware.run(rootSaga);
 
 // On crée un persistor qui va permettre de stocker une partie
