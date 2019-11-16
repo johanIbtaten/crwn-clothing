@@ -16,7 +16,8 @@ const HomePage = () => {
   Profiler permet de logger combien de temps met un composant
   à se charger
   */}
-  <Profiler
+  {/*
+    <Profiler
     id='Directory'
     onRender={(id, phase, actualDuration) => {
       console.log({
@@ -26,8 +27,9 @@ const HomePage = () => {
       });
     }}  
   >
+  */}
     <Directory />
-  </Profiler>
+  {/*</Profiler>*/}
 
   </HomePageContainer>
 )};

@@ -60,6 +60,40 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+export const createUserCartDocument = async (userId, cartItemsToAdd) => {
+  if (!userId) return;
+  const cartRef = firestore.doc(`carts/${userId}`);
+
+  const snapShot = await cartRef.get();
+
+    if (!snapShot.exists) {   
+      try {    
+        await cartRef.set({
+          ...cartItemsToAdd
+        });
+      } catch (error) {
+        console.log('error creating cart', error.message);
+      }
+    }
+
+    return cartRef; 
+}
+
+export const updateUserCartDocument = async (userId, newCartItems) => {
+  //if (!newCartItems) return;
+  const cartRef = firestore.doc(`carts/${userId}`)
+
+  try {    
+    await cartRef.set({
+      ...newCartItems
+    });
+  } catch (error) {
+    console.log('error updating cart', error.message);
+  }
+
+  return cartRef; 
+}
+
 export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
   // On crée une collection avec le nom collectionKey
   // Firebase nous renvoie une reference

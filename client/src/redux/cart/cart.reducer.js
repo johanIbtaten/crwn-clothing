@@ -37,6 +37,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         cartItems: []
       };
+    case CartActionTypes.FETCH_USER_CART_SUCCESS:
+      return {
+        ...state,
+        cartItems: action.payload
+      };
     default:
       return state;
   }

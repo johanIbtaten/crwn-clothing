@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 // Input selector qui permet de sélectionner une partie du store
 // de redux, ici on sélectionne dans selectCart la partie state.card
 // du store
-const selectCart = state => state.cart;
+export const selectCart = state => state.cart;
 
 // Output selector qui retourne le tableau cartItems depuis
 // l'input selector selectCart
