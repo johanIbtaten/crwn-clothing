@@ -3,7 +3,8 @@ import { addItemToCart, removeItemFromCart } from './cart.utils';
 
 const INITIAL_STATE = {
   hidden: true,
-  cartItems: []
+  cartItems: [],
+  errorMessage: undefined
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -41,6 +42,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cartItems: action.payload
+      };
+    case CartActionTypes.FETCH_USER_CART_FAILURE:
+      return {
+        ...state,
+        errorMessage: action.payload
       };
     default:
       return state;

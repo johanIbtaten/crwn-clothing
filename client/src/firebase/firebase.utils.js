@@ -66,7 +66,15 @@ export const createUserCartDocument = async (userId, cartItemsToAdd) => {
 
   const snapShot = await cartRef.get();
 
-    if (!snapShot.exists) {   
+  console.log("cartItemsToAdd", cartItemsToAdd);
+  console.log("cartItemsToAdd.length", cartItemsToAdd.length);
+  if (cartItemsToAdd.length > 0) {
+    console.log("Tableau non vide");
+  } else {
+    console.log("Tableau non vide");
+  }
+
+    if (!snapShot.exists || cartItemsToAdd.length > 0) {   
       try {    
         await cartRef.set({
           ...cartItemsToAdd
