@@ -55,30 +55,31 @@ export function* getSnapshotFromUserCart({ payload: { id : userId} }) {
 export function* updateUserCart() {
     const user = yield select(selectUser)
     console.log(user) 
-    const userId = user.currentUser.id
+    console.log("currentUser:", user.currentUser)
 
-    const cart = yield select(selectCart)
-    const newCartItems = cart.cartItems
-  
+    if(user.currentUser != null) {
+      console.log("user.currentUser n'est pas null")
+      const userId = user.currentUser.id
 
-    try {
+      const cart = yield select(selectCart)
+      const newCartItems = cart.cartItems
+    
 
-      //if (userId) {
-
-        const cartRef = yield call(
-          updateUserCartDocument,
-          userId,
-          newCartItems
-        );
-        console.log(cartRef)
-        yield put({type : 'UPDATE_CART'})
-
-      // } else {
-      //   return false
-      // }
-    } catch (error) {
-      
+      try {
+          const cartRef = yield call(
+            updateUserCartDocument,
+            userId,
+            newCartItems
+          );
+          console.log(cartRef)
+          yield put({type : 'UPDATE_CART'})
+      } catch (error) {
+        
+      }
+    } else {
+      console.log('user.currentUser est null')
     }
+    
 
   }
 
