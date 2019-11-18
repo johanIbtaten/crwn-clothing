@@ -2,7 +2,13 @@ import { all, call, takeLatest, put, select } from 'redux-saga/effects';
 
 import UserActionTypes from '../user/user.types';
 import CartActionTypes from '../cart/cart.types';
-import { clearCart, fetchUserCartSuccess, fetchUserCartFailure } from './cart.actions';
+import { 
+  clearCart, 
+  fetchUserCartSuccess, 
+  fetchUserCartFailure,
+  updateUserCartFailure 
+} from './cart.actions';
+
 import { selectCart } from './cart.selectors';
 import { selectUser } from '../user/user.selectors';
 
@@ -56,9 +62,9 @@ export function* updateUserCart() {
             newCartItems
           );
           // console.log(cartRef)
-          yield put({type : 'UPDATE_CART'})
+          console.log('UPDATE_CART')
       } catch (error) {
-        
+        yield put(updateUserCartFailure(error.message));
       }
     } 
     // else 

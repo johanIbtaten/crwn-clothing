@@ -44,6 +44,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         cartItems: action.payload
       };
     case CartActionTypes.FETCH_USER_CART_FAILURE:
+    case CartActionTypes.UPDATE_USER_CART_FAILURE:
       return {
         ...state,
         errorMessage: action.payload

@@ -32,3 +32,12 @@ export const fetchUserCartFailure = error => ({
   type: CartActionTypes.FETCH_USER_CART_FAILURE,
   payload: error
 });
+
+// export const updateUserCartSuccess = () => ({
+//   type: CartActionTypes.UPDATE_USER_CART_SUCCESS
+// });
+
+export const updateUserCartFailure = error => ({
+  type: CartActionTypes.UPDATE_USER_CART_FAILURE,
+  payload: error
+});

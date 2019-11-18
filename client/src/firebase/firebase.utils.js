@@ -63,16 +63,16 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 export const createUserCartDocument = async (userId, cartItemsToAdd) => {
   if (!userId) return;
   const cartRef = firestore.doc(`carts/${userId}`);
-
   const snapShot = await cartRef.get();
 
-  console.log("cartItemsToAdd", cartItemsToAdd);
-  console.log("cartItemsToAdd.length", cartItemsToAdd.length);
-  if (cartItemsToAdd.length > 0) {
-    console.log("Tableau non vide");
-  } else {
-    console.log("Tableau non vide");
-  }
+  // console.log("cartItemsToAdd", cartItemsToAdd);
+  // console.log("cartItemsToAdd.length", cartItemsToAdd.length);
+
+  // if (cartItemsToAdd.length > 0) {
+  //   console.log("Tableau non vide");
+  // } else {
+  //   console.log("Tableau non vide");
+  // }
 
     if (!snapShot.exists || cartItemsToAdd.length > 0) {   
       try {    
@@ -88,7 +88,6 @@ export const createUserCartDocument = async (userId, cartItemsToAdd) => {
 }
 
 export const updateUserCartDocument = async (userId, newCartItems) => {
-  //if (!newCartItems) return;
   const cartRef = firestore.doc(`carts/${userId}`)
 
   try {    
