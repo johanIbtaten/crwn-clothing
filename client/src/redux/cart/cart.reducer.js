@@ -38,16 +38,10 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         cartItems: []
       };
-    case CartActionTypes.FETCH_USER_CART_SUCCESS:
+    case CartActionTypes.SET_CART_FROM_FIREBASE:
       return {
         ...state,
         cartItems: action.payload
-      };
-    case CartActionTypes.FETCH_USER_CART_FAILURE:
-    case CartActionTypes.UPDATE_USER_CART_FAILURE:
-      return {
-        ...state,
-        errorMessage: action.payload
       };
     default:
       return state;

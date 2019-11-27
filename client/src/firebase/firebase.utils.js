@@ -60,46 +60,34 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-export const createUserCartDocument = async (userId, cartItemsToAdd) => {
-  if (!userId) return;
-  const cartRef = firestore.doc(`carts/${userId}`);
-  const snapShot = await cartRef.get();
+export const getUserCartRef = async userId => {
+  // On cherche si il existe un document dans la collection carts
+  // avec la propriété userId égale à l'userId de l'utilisateur connecté.
+  // On récupère la référence du doc qu'il existe ou pas
+  const cartsRef = firestore.collection('carts').where('userId', '==', userId);
 
-  // console.log("cartItemsToAdd", cartItemsToAdd);
-  // console.log("cartItemsToAdd.length", cartItemsToAdd.length);
+  // On récupère le snapshot qui contient les données à partir de la
+  // référence.
+  const snapShot = await cartsRef.get();  
 
-  // if (cartItemsToAdd.length > 0) {
-  //   console.log("Tableau non vide");
-  // } else {
-  //   console.log("Tableau non vide");
-  // }
-
-    if (!snapShot.exists || cartItemsToAdd.length > 0) {   
-      try {    
-        await cartRef.set({
-          ...cartItemsToAdd
-        });
-      } catch (error) {
-        console.log('error creating cart', error.message);
-      }
-    }
-
-    return cartRef; 
-}
-
-export const updateUserCartDocument = async (userId, newCartItems) => {
-  const cartRef = firestore.doc(`carts/${userId}`)
-
-  try {    
-    await cartRef.set({
-      ...newCartItems
-    });
-  } catch (error) {
-    console.log('error updating cart', error.message);
+  // Si il n'existe pas de document correspondant à cette référence
+  if (snapShot.empty) {
+    // Alors on crée un nouveau document dans la collection carts
+    // On récupère sa référence
+    const cartDocRef = firestore.collection('carts').doc();
+    // On insère les données correspondant dans le document
+    // qui est un objet avec l'userId et le tableau des items du cart
+    await cartDocRef.set({ userId, cartItems: [] });
+    // On retourne la référence du nouveau document créé
+    return cartDocRef;
+  // Si il existe déjà un document avec des données correspondant
+  // à l'userId de l'utilisateur connecté.
+  } else {
+    // On retourne la référence du premier document trouvé dans le 
+    // tableau des docs correspondant à la requête where;
+    return snapShot.docs[0].ref;
   }
-
-  return cartRef; 
-}
+};
 
 export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
   // On crée une collection avec le nom collectionKey
@@ -118,26 +106,6 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
   // batch.commit() renvoie une promesse qui est résolue avec la valeur null
   return await batch.commit();
 };
-
-// Ajouter ce code dans App.js pour ajouter une collection à Firebase à partir du JSON 
-
-//import { auth, createUserProfileDocument, addCollectionAndDocuments  } from './firebase/firebase.utils';
-//import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
-
-// componentDidMount() {
-//   const { setCurrentUser, collectionsArray } = this.props;
-
-//   this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-//     [...]
-//     setCurrentUser(userAuth);
-//     addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({title, items})));
-//   });
-// }
-
-// const mapStateToProps = createStructuredSelector({
-//   currentUser: selectCurrentUser,
-//   collectionsArray: selectCollectionsForPreview
-// });
 
 // Transorme les données Back-End de Firebase
 // en données pour le Front-End sous forme d'une Hashmap
@@ -205,3 +173,23 @@ googleProvider.setCustomParameters({ prompt: 'select_account' });
 export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
 export default firebase;
+
+// Ajouter ce code dans App.js pour ajouter une collection à Firebase à partir du JSON 
+
+//import { auth, createUserProfileDocument, addCollectionAndDocuments  } from './firebase/firebase.utils';
+//import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
+
+// componentDidMount() {
+//   const { setCurrentUser, collectionsArray } = this.props;
+
+//   this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+//     [...]
+//     setCurrentUser(userAuth);
+//     addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({title, items})));
+//   });
+// }
+
+// const mapStateToProps = createStructuredSelector({
+//   currentUser: selectCurrentUser,
+//   collectionsArray: selectCollectionsForPreview
+// });

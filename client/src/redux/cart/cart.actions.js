@@ -23,21 +23,11 @@ export const clearCart = () => ({
   type: CartActionTypes.CLEAR_CART
 });
 
-export const fetchUserCartSuccess = userCartItems => ({
-  type: CartActionTypes.FETCH_USER_CART_SUCCESS,
-  payload: userCartItems
+export const updateCartInFirebase = () => ({
+  type: CartActionTypes.UPDATE_CART_IN_FIREBASE
 });
 
-export const fetchUserCartFailure = error => ({
-  type: CartActionTypes.FETCH_USER_CART_FAILURE,
-  payload: error
-});
-
-// export const updateUserCartSuccess = () => ({
-//   type: CartActionTypes.UPDATE_USER_CART_SUCCESS
-// });
-
-export const updateUserCartFailure = error => ({
-  type: CartActionTypes.UPDATE_USER_CART_FAILURE,
-  payload: error
+export const setCartFromFirebase = cartItems => ({
+  type: CartActionTypes.SET_CART_FROM_FIREBASE,
+  payload: cartItems
 });
