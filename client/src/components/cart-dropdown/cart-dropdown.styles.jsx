@@ -19,10 +19,16 @@ export const CartDropdownButton = styled(CustomButton)`
   margin-top: auto;
 `;
 
+// On donne un nom au styled component que l'on veut 
+// pouvoir retrouver dans les wrapper de shallow() de enzyme
+CartDropdownButton.displayName = 'CartDropdownButton';
+
 export const EmptyMessageContainer = styled.span`
   font-size: 18px;
   margin: 50px auto;
 `;
+
+EmptyMessageContainer.displayName = 'EmptyMessageContainer';
 
 export const CartItemsContainer = styled.div`
   height: 240px;
