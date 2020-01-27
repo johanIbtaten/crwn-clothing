@@ -31,7 +31,9 @@ export const Header = ({ currentUser, hidden, signOutStart }) => (
     </LogoContainer>
     <OptionsContainer>
       <OptionLink to='/shop'>SHOP</OptionLink>
-      <OptionLink to='/shop'>CONTACT</OptionLink>
+      { /*
+        <OptionLink to='/shop'>CONTACT</OptionLink>
+      */ } 
       {currentUser ? (
         // as='div' permet transformer le composant OptionLink en div
         // en gardant les styles de OptionLink
