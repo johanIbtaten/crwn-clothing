@@ -55,3 +55,8 @@ export const WarningContainer = styled.div`
   font-size: 24px;
   color: red;
 `;
+
+export const EmptyMessage = styled.span`
+  font-size: 18px;
+  margin: 50px auto 24px;
+`;

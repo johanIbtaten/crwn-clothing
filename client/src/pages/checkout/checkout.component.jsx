@@ -15,7 +15,8 @@ import {
   CheckoutHeaderContainer,
   HeaderBlockContainer,
   TotalContainer,
-  WarningContainer
+  WarningContainer,
+  EmptyMessage
 } from './checkout.styles';
 
 export const CheckoutPage = ({ cartItems, total }) => (
@@ -37,9 +38,19 @@ export const CheckoutPage = ({ cartItems, total }) => (
         <span>Remove</span>
       </HeaderBlockContainer>
     </CheckoutHeaderContainer>
-    {cartItems.map(cartItem => (
-      <CheckoutItem key={cartItem.id} cartItem={cartItem} />
-    ))}
+      { /* 
+      Si cartItems.length est égal 0 l'expression est évaluée à false
+      et on affiche "Your cart is empty"
+      Sinon à true et on affiche les items du panier
+      */ }
+      {cartItems.length ? (
+        cartItems.map(cartItem => (
+          <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+        ))
+      ) : (
+        <EmptyMessage>Your cart is empty</EmptyMessage>
+      )}
+    
     <TotalContainer>TOTAL: ${total}</TotalContainer>
     <WarningContainer>
       *Please use the following test credit card for payments*
