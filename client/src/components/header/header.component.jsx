@@ -30,7 +30,7 @@ export const Header = ({ currentUser, hidden, signOutStart }) => (
       <Logo className='logo' />
     </LogoContainer>
     <OptionsContainer>
-      <OptionLink to='/shop'>SHOP</OptionLink>
+      <OptionLink to='/shop'>Shop</OptionLink>
       { /*
         <OptionLink to='/shop'>CONTACT</OptionLink>
       */ } 
@@ -38,10 +38,10 @@ export const Header = ({ currentUser, hidden, signOutStart }) => (
         // as='div' permet transformer le composant OptionLink en div
         // en gardant les styles de OptionLink
         <OptionLink as='div' onClick={signOutStart}>
-          SIGN OUT
+          Déconnexion
         </OptionLink>
       ) : (
-        <OptionLink to='/signin'>SIGN IN</OptionLink>
+        <OptionLink to='/signin'>Connexion</OptionLink>
       )}
       <CartIcon />
     </OptionsContainer>

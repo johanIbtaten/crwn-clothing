@@ -26,7 +26,7 @@ export const CollectionPage = ({ collection }) => {
 };
 
 // Le premier argument de mapStateToProps est le state global de redux.
-// Le second argument ownProps conient toutes les props du composant
+// Le second argument ownProps contient toutes les props du composant
 // entouré par connect() ce qui permet de les utiliser dans les selectors
 const mapStateToProps = (state, ownProps) => ({
   // On doit passer l'argument qui utilise ownProps mais aussi le state.

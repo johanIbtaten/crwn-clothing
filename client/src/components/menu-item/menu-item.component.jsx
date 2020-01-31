@@ -27,7 +27,7 @@ export const MenuItem = ({
     />
     <ContentContainer className='content'>
       <ContentTitle>{title.toUpperCase()}</ContentTitle>
-      <ContentSubtitle>SHOP NOW</ContentSubtitle>
+      <ContentSubtitle>Collection</ContentSubtitle>
     </ContentContainer>
   </MenuItemContainer>
 );

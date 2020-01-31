@@ -40,7 +40,7 @@ export const CheckoutPage = ({ cartItems, total }) => (
     </CheckoutHeaderContainer>
       { /* 
       Si cartItems.length est égal 0 l'expression est évaluée à false
-      et on affiche "Your cart is empty"
+      et on affiche "Votre panier est vide"
       Sinon à true et on affiche les items du panier
       */ }
       {cartItems.length ? (
@@ -48,14 +48,14 @@ export const CheckoutPage = ({ cartItems, total }) => (
           <CheckoutItem key={cartItem.id} cartItem={cartItem} />
         ))
       ) : (
-        <EmptyMessage>Your cart is empty</EmptyMessage>
+        <EmptyMessage>Votre panier est vide</EmptyMessage>
       )}
     
-    <TotalContainer>TOTAL: ${total}</TotalContainer>
+    <TotalContainer>TOTAL: {total+'€'}</TotalContainer>
     <WarningContainer>
-      *Please use the following test credit card for payments*
+      *Merci d'utiliser ce numéro de carte de crédit de test pour effectuer les paiements
       <br />
-      4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
+      4242&nbsp;4242&nbsp;4242&nbsp;4242 - Exp:&nbsp;01/20 - CVV:&nbsp;123
     </WarningContainer>
     <StripeCheckoutButton price={total} />
   </CheckoutPageContainer>

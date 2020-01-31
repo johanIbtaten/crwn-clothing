@@ -53,8 +53,8 @@ const SignIn = ({ emailSignInStart, googleSignInStart }) => {
 
   return (
     <SignInContainer>
-      <SignInTitle>I already have an account</SignInTitle>
-      <span>Sign in with your email and password</span>
+      <SignInTitle>J'ai déjà un compte</SignInTitle>
+      <span>Connectez-vous avec votre email et votre mot de passe</span>
 
       <form onSubmit={handleSubmit}>
         <FormInput
@@ -62,7 +62,7 @@ const SignIn = ({ emailSignInStart, googleSignInStart }) => {
           type='email'
           handleChange={handleChange}
           value={email}
-          label='email'
+          label='Email'
           required
         />
         <FormInput
@@ -70,11 +70,11 @@ const SignIn = ({ emailSignInStart, googleSignInStart }) => {
           type='password'
           value={password}
           handleChange={handleChange}
-          label='password'
+          label='Mot de passe'
           required
         />
         <ButtonsBarContainer>
-          <CustomButton type='submit'> Sign in </CustomButton>
+          <CustomButton type='submit'> Connexion </CustomButton>
           <CustomButton
             /*
             On met un attribut button pour que le bouton
@@ -88,7 +88,7 @@ const SignIn = ({ emailSignInStart, googleSignInStart }) => {
             onClick={googleSignInStart}
             isGoogleSignIn
           >
-            Sign in with Google
+            Connexion avec Google
           </CustomButton>
         </ButtonsBarContainer>
       </form>

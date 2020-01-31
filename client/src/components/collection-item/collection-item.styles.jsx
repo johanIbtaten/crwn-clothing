@@ -8,6 +8,7 @@ export const CollectionItemContainer = styled.div`
   height: 350px;
   align-items: center;
   position: relative;
+  margin-bottom: 30px;
 
   &:hover {
     .image {
@@ -76,13 +77,14 @@ CollectionFooterContainer.displayName = 'CollectionFooterContainer';
 export const NameContainer = styled.span`
   width: 90%;
   margin-bottom: 15px;
+  text-transform: capitalize;
 `;
 
 NameContainer.displayName = 'NameContainer';
 
 export const PriceContainer = styled.span`
-  width: 10%;
   text-align: right;
+  margin-left: 10px;
 `;
 
 PriceContainer.displayName = 'PriceContainer';

@@ -6,7 +6,7 @@ import CustomButton from '../custom-button/custom-button.component';
 
 import { signUpStart } from '../../redux/user/user.actions';
 
-import { SignUpContainer, SignUpTitle } from './sign-up.styles';
+import { SignUpContainer, SignUpTitle, ButtonsResponsive } from './sign-up.styles';
 
 const SignUp = ({ signUpStart }) => {
   const [userCredentials, setUserCredentials] = useState({
@@ -48,15 +48,15 @@ const SignUp = ({ signUpStart }) => {
 
   return (
     <SignUpContainer>
-      <SignUpTitle>I do not have a account</SignUpTitle>
-      <span>Sign up with your email and password</span>
+      <SignUpTitle>Je n'ai pas de compte</SignUpTitle>
+      <span>Inscrivez-vous avec un email et un mot de passe</span>
       <form className='sign-up-form' onSubmit={handleSubmit}>
         <FormInput
           type='text'
           name='displayName'
           value={displayName}
           onChange={handleChange}
-          label='Display Name'
+          label='Nom'
           required
         />
         <FormInput
@@ -72,7 +72,7 @@ const SignUp = ({ signUpStart }) => {
           name='password'
           value={password}
           onChange={handleChange}
-          label='Password'
+          label='Mot de passe'
           required
         />
         <FormInput
@@ -80,10 +80,12 @@ const SignUp = ({ signUpStart }) => {
           name='confirmPassword'
           value={confirmPassword}
           onChange={handleChange}
-          label='Confirm Password'
+          label='Confirmation du mot de passe'
           required
         />
-        <CustomButton type='submit'>SIGN UP</CustomButton>
+        <ButtonsResponsive>
+          <CustomButton type='submit'>Inscription</CustomButton>
+        </ButtonsResponsive>
       </form>
     </SignUpContainer>
   );

@@ -19,7 +19,7 @@ export const CartDropdown = ({ cartItems, history, dispatch }) => (
     <CartItemsContainer>
       { /* 
       Si cartItems.length est égal 0 l'expression est évaluée à false
-      et on affiche "Your cart is empty"
+      et on affiche "Votre panier est vide" 
       Sinon à true et on affiche les items du panier
       */ }
       {cartItems.length ? (
@@ -27,7 +27,7 @@ export const CartDropdown = ({ cartItems, history, dispatch }) => (
           <CartItem key={cartItem.id} item={cartItem} />
         ))
       ) : (
-        <EmptyMessageContainer>Your cart is empty</EmptyMessageContainer>
+        <EmptyMessageContainer>Votre panier est vide</EmptyMessageContainer>
       )}
     </CartItemsContainer>
     <CartDropdownButton
@@ -38,7 +38,7 @@ export const CartDropdown = ({ cartItems, history, dispatch }) => (
         dispatch(toggleCartHidden());
       }}
     >
-      GO TO CHECKOUT
+      Voir la commande
     </CartDropdownButton>
   </CartDropdownContainer>
 );
