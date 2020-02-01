@@ -19,7 +19,7 @@ const composeEnhancers =
 // ...les actions dispatchées et les traiter avant de les renvoyer...
 // ...vers les reducers ou d'envoyer d'autres actions.
 const enhancer = composeEnhancers(
-  applyMiddleware(sagaMiddleware, logger),
+  applyMiddleware(sagaMiddleware, logger)
 );
 
 // On crée le store en lui passant le rootReducer et les middlWares
