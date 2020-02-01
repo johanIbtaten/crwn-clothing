@@ -1,1 +1,1 @@
-Cette application a été créée à partir [Create React App](https://github.com/facebook/create-react-app).
+Cette application a été créée à partir de [Create React App](https://github.com/facebook/create-react-app).
