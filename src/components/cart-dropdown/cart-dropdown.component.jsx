@@ -38,7 +38,7 @@ export const CartDropdown = ({ cartItems, history, dispatch }) => (
         dispatch(toggleCartHidden());
       }}
     >
-      Voir la commande
+      Voir
     </CartDropdownButton>
   </CartDropdownContainer>
 );
